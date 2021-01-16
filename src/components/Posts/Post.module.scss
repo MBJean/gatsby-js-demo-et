@@ -25,3 +25,13 @@
   background-color: none;
   cursor: pointer;
 }
+
+.user,
+.comments {
+  border-left: $space-s solid $color-primary;
+  padding: $space-m;
+}
+
+.comments {
+  border-color: $color-secondary;
+}

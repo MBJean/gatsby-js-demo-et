@@ -4,14 +4,14 @@ import NavigationSide from '../Navigation/NavigationSide'
 import NavigationTop from '../Navigation/NavigationTop'
 import LayoutStyles from './Layout.module.scss'
 
-const Layout = props => (
+const Layout = ({ children }) => (
   <main>
     <div>
       <NavigationTop />
       <div className={LayoutStyles.body}>
         <NavigationSide />
         <div>
-          { props.children }
+          { children }
         </div>
       </div>
       <Footer />

@@ -4,7 +4,7 @@ import Comment from '../Comments/Comment'
 import LoadingDefault from '../Loading/LoadingDefault'
 import PostStyles from './Post.module.scss'
 
-const Post = (props) => {
+const Post = ({ post, user }) => {
 
   const [comments, setComments] = useState([])
   const [loading, setLoading] = useState(false)
@@ -17,7 +17,7 @@ const Post = (props) => {
 
   async function fetchComments() {
     setLoading(true)
-    const response = await fetch(`https://jsonplaceholder.typicode.com/posts/${props.post.id}/comments`)
+    const response = await fetch(`https://jsonplaceholder.typicode.com/posts/${post.id}/comments`)
     if (!response.ok) throw new Error(`fetchComments error: ${response.status}`)
     const comments = await response.json()
     setComments(comments)
@@ -35,7 +35,7 @@ const Post = (props) => {
 
   const renderedComments = comments.map((comment, index) => (
     <li key={index}>
-      <Comment comment={comment} />
+      <Comment comment={comment} user={null} />
     </li>
   ))
 
@@ -46,21 +46,31 @@ const Post = (props) => {
 
   return (
     <div className={PostStyles.post}>
-      <h3>{ props.post.title }</h3>
-      <p>{ props.post.body }</p>
+      <h3>{ post.title }</h3>
+      <p>{ post.body }</p>
       <div className={PostStyles.actions}>
         <button className={PostStyles.action} onClick={toggleShowUser}>
           <span className="material-icons">face</span>
-          { props.user ? props.user.name : <LoadingDefault loading={true} /> }
+          { user ? user.name : <LoadingDefault loading={true} /> }
         </button>
         <button className={PostStyles.action} onClick={toggleShowComments}>
           <span className="material-icons">comment</span>
           { comments ? comments.length : <LoadingDefault loading={true} /> }
         </button>
       </div>
-      <ul>
-        { showComments && renderedComments }
-      </ul>
+      {
+        showUser &&
+          <div className={PostStyles.user}>
+            <p>{ user.name } ({ user.username })</p>
+            <p>{ user.email }</p>
+          </div>
+      }
+      {
+        showComments &&
+          <ul className={PostStyles.comments}>
+            { showComments && renderedComments }
+          </ul>
+      }
     </div>
   )
 }

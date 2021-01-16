@@ -8,6 +8,7 @@ const Posts = props => {
   const [loading, setLoading] = useState(false)
   const [posts, setPosts] = useState([])
   const [users, setUsers] = useState({})
+  const [usersByEmail, setUsersByEmail] = useState({})
 
   useEffect(() => {
     fetchPosts().catch(error => errorHandler(error))
@@ -23,7 +24,14 @@ const Posts = props => {
     setPosts(posts)
     const promises = dedupedUserIds.map(id => fetchUser(id))
     const userList = await Promise.all(promises).then(users => users)
-    userList.forEach(user => users[user.id] = user)
+    const userListById = {}
+    const userListByEmail = {}
+    userList.forEach(user => {
+      userListById[user.id] = user
+      userListByEmail[user.email] = user
+    })
+    setUsers(userListById)
+    setUsersByEmail(userListByEmail)
     setLoading(false)
   }
 
@@ -34,10 +42,13 @@ const Posts = props => {
     return user
   }
 
+  const getUserById = id => users[id]
+  const getUserByEmail = email => usersByEmail[email]
+
   const renderedPosts = posts.map(
     (post, index) => (
       <li key={index}>
-        <Post post={post} user={users[post.userId]} />
+        <Post post={post} user={users[post.userId]} getUserByEmail={getUserByEmail} />
       </li>
     )
   )
