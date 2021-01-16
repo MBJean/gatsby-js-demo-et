@@ -1,12 +1,11 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import CommentStyles from './Comment.module.scss'
+import STYLES from './Comment.module.scss'
 
 const Comment = ({ comment }) => (
-  <li className={ CommentStyles.comment }>
-    <p>{ comment.name }</p>
-    <p>{ comment.body }</p>
-    <p className={ CommentStyles.commenter }>
+  <li className={ STYLES.comment }>
+    <p className={ STYLES.body }>{ comment.body }</p>
+    <p className={ STYLES.commenter }>
       <span className="material-icons">face</span>
       <span>{ comment.email }</span>
     </p>

@@ -1,6 +1,6 @@
 * {
   box-sizing: border-box;
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Raleway', sans-serif;
   font-weight: 400;
 }
 
@@ -21,6 +21,10 @@ a {
   &:active {
     text-decoration: underline;
   }
+  &:focus,
+  &:active {
+    outline-color: $color-secondary;
+  }
 }
 
 button {
@@ -32,27 +36,31 @@ button {
   margin: 0;
   padding: 0;
   text-transform: none;
+  &:focus,
+  &:active {
+    outline-color: $color-secondary;
+  }
 }
 
 h1,
 .h--1 {
-  font-family: 'Raleway', sans-serif;
-  font-size: $font-size-xl;
+  font-family: 'Roboto', sans-serif;
+  font-size: $font-size-xxl;
   font-weight: 400;
   line-height: 1;
-  margin-bottom: $space-l;
+  margin-bottom: $space-s;
 }
 
 h2,
 .h--2 {
-  font-size: $font-size-l;
+  font-size: $font-size-xl;
   line-height: 1;
   margin-bottom: $space-l;
 }
 
 h3,
 .h--3 {
-  font-size: $font-size-m;
+  font-size: $font-size-l;
   font-weight: 700;
   line-height: 1;
   margin-bottom: $space-s;

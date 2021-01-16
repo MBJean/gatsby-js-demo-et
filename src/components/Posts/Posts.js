@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import LoadingIcon from '../Loading/LoadingIcon'
 import Post from '../Post/Post'
-import PostsStyles from './Posts.module.scss'
+import STYLES from './Posts.module.scss'
 
 const Posts = () => {
 
@@ -61,8 +61,8 @@ const Posts = () => {
 
   return (
     <div>
-      <LoadingIcon loading={loading} />
-      <div className={PostsStyles.paginationActions}>
+      <LoadingIcon loading={ loading } />
+      <div className={ STYLES.paginationActions }>
         <button onClick={ onClickPreviousPage }>
           <span className="material-icons">navigate_before</span>
           <span className="sr-only">View previous page</span>
@@ -73,12 +73,12 @@ const Posts = () => {
           <span className="sr-only">View next page</span>
         </button>
       </div>
-      <ul className={PostsStyles.posts}>
+      <ul className={STYLES.posts}>
         {
           postsByPage.map(
             post => (
-              <li key={`post-${post.id}`}>
-                <Post post={post} user={users[post.userId]} />
+              <li key={`post-${ post.id }`}>
+                <Post post={ post } user={ users[post.userId] } />
               </li>
             )
           )

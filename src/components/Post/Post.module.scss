@@ -21,7 +21,7 @@
 .action {
   appearance: none;
   border: 0;
-  border-radius: $space-xs;
+  border-radius: 0;
   background-color: none;
   cursor: pointer;
   > :not(:last-child) {
@@ -41,12 +41,16 @@
   }
 }
 
+.body {
+  max-width: 700px;
+}
+
 .user {
-  border: 2px solid $color-secondary;
-  border-radius: $space-s;
+  background-color: transparentize($color-secondary, 0.7);
+  margin: 0 -1rem -1rem;
   padding: $space-m;
 }
 
 .comments {
-  margin-top: $space-m;
+  margin: $space-m 0 -1rem;
 }

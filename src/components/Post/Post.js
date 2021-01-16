@@ -31,11 +31,11 @@ const Post = ({ post, user }) => {
   }, [post]);
 
   return (
-    <div className={STYLES.post}>
+    <div className={ STYLES.post }>
       <h3>{ post.title }</h3>
-      <p>{ post.body }</p>
-      <div className={STYLES.actions}>
-        <button className={`${STYLES.action} ${STYLES.actionUser}`} onClick={toggleShowUser}>
+      <p className={ STYLES.body }>{ post.body }</p>
+      <div className={ STYLES.actions }>
+        <button className={ `${STYLES.action} ${STYLES.actionUser}` } onClick={ toggleShowUser }>
           <span className="material-icons">account_circle</span>
           {
             user ?
@@ -43,7 +43,7 @@ const Post = ({ post, user }) => {
               <LoadingIcon loading={true} />
           }
         </button>
-        <button className={`${STYLES.action} ${STYLES.actionComment}`} onClick={toggleShowComments}>
+        <button className={`${STYLES.action} ${STYLES.actionComment}`} onClick={ toggleShowComments }>
           <span className="material-icons">comment</span>
           {
             comments.length ?
@@ -54,22 +54,18 @@ const Post = ({ post, user }) => {
       </div>
       {
         showUser &&
-          <div>
-            <h4>User</h4>
-            <div className={STYLES.user}>
-              <p>{ user.name } ({ user.username })</p>
-              <p>{ user.email }</p>
-            </div>
+          <div className={ STYLES.user }>
+            <p className="mb--none"><strong>{ user.username }</strong> ({ user.name })</p>
+            <p>{ user.email }</p>
           </div>
       }
       {
         showComments &&
-          <div className={STYLES.comments}>
-            <h4>Comments</h4>
+          <div className={ STYLES.comments }>
             <ul>
               {
                 comments.map(comment => (
-                  <Comment key={`comment-${comment.id}`} comment={comment} user={null} />
+                  <Comment key={ `comment-${comment.id}` } comment={comment} />
                 ))
               }
             </ul>

@@ -1,12 +1,16 @@
 @import '../../styles/variables.scss';
 
 .comment {
-  border: 2px solid $color-primary;
-  border-radius: $space-s;
+  background-color: transparentize($color-primary, 0.7);
+  margin: 0 -1rem;
   padding: $space-m;
-  &:not(:last-child) {
-    margin-bottom: $space-m;
+  &:nth-child(even) {
+    background-color: transparentize($color-primary, 0.8);
   }
+}
+
+.body {
+  max-width: 700px;
 }
 
 .commenter {

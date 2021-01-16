@@ -1,8 +1,8 @@
 import React from 'react'
-import NavigationStyles from './Navigation.module.scss'
+import STYLES from './Navigation.module.scss'
 
 const Navigation = () => (
-  <nav className={ NavigationStyles.nav }>
+  <nav className={ STYLES.nav }>
     <a href="/">IPSUM</a>
   </nav>
 )
