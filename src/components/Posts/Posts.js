@@ -13,6 +13,13 @@ const Posts = () => {
   const totalPages = Math.floor(posts.length / 10) - 1
   const postsByPage = posts.slice(currentPage * totalPages, currentPage * totalPages + 10)
 
+  const fetchPosts = async () => {
+    const postsResponse = await fetch('https://jsonplaceholder.typicode.com/posts')
+    if (!postsResponse.ok) throw new Error(`fetchPosts error: ${postsResponse.status}`)
+    const posts = await postsResponse.json()
+    return posts
+  }
+
   const fetchUser = async (id) => {
     const response = await fetch(`https://jsonplaceholder.typicode.com/users/${id}`)
     if (!response.ok) throw new Error(`fetchUser error: ${response.status}`)
@@ -34,11 +41,9 @@ const Posts = () => {
   }
 
   useEffect(() => {
-    async function fetchPosts() {
+    async function seedInitialData() {
       setLoading(true)
-      const postsResponse = await fetch('https://jsonplaceholder.typicode.com/posts')
-      if (!postsResponse.ok) throw new Error(`fetchPosts error: ${postsResponse.status}`)
-      const posts = await postsResponse.json()
+      const posts = await fetchPosts()
       const userIds = posts.map(post => post.userId)
       const dedupedUserIds = [...new Set(userIds)]
       const promises = dedupedUserIds.map(id => fetchUser(id))
@@ -51,7 +56,7 @@ const Posts = () => {
       setLoading(false)
     }
 
-    fetchPosts().catch(error => errorHandler(error))
+    seedInitialData().catch(error => errorHandler(error))
   }, []);
 
   return (
