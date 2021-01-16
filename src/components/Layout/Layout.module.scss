@@ -1,10 +1,17 @@
 @import '../../styles/variables';
 
-.body {
+.background {
   background-color: $color-tertiary;
-  display: flex;
+  padding-top: $space-l;
+}
+
+.content {
   padding: $space-m;
-  > :first-child {
-    width: 20%;
+  @include container;
+}
+
+@media (min-width: $width-large) {
+  .background {
+    padding-top: $space-xl;
   }
 }

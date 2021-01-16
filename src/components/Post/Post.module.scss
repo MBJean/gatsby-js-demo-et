@@ -8,14 +8,14 @@
 .action {
   align-items: center;
   display: flex;
-  > * {
-    margin-right: $space-xs;
-  }
 }
 
 .actions {
   justify-content: flex-end;
   margin: $space-s 0;
+  > :not(:last-child) {
+    margin-right: $space-m;
+  }
 }
 
 .action {
@@ -24,14 +24,16 @@
   border-radius: $space-xs;
   background-color: none;
   cursor: pointer;
+  > :not(:last-child) {
+    margin-right: $space-xs;
+  }
 }
 
-.user,
-.comments {
-  border-left: $space-s solid $color-primary;
+.user {
+  border: 1px solid $color-primary;
+  border-radius: $space-s;
   padding: $space-m;
-}
-
-.comments {
-  border-color: $color-secondary;
+  &:not(:last-child) {
+    margin-bottom: $space-m;
+  }
 }

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import LoadingDefault from '../Loading/LoadingDefault'
-import Post from './Post'
+import LoadingIcon from '../Loading/LoadingIcon'
+import Post from '../Post/Post'
 import PostsStyles from './Posts.module.scss'
 
 const Posts = props => {
@@ -9,36 +9,30 @@ const Posts = props => {
   const [loading, setLoading] = useState(false)
   const [posts, setPosts] = useState([])
   const [users, setUsers] = useState({})
-  const [usersByEmail, setUsersByEmail] = useState({})
 
   const totalPages = Math.floor(posts.length / 10) - 1
   const postsByPage = posts.slice(currentPage * totalPages, currentPage * totalPages + 10)
 
 
   useEffect(() => {
+    async function fetchPosts() {
+      setLoading(true)
+      const postsResponse = await fetch('https://jsonplaceholder.typicode.com/posts')
+      if (!postsResponse.ok) throw new Error(`fetchPosts error: ${postsResponse.status}`)
+      const posts = await postsResponse.json()
+      const userIds = posts.map(post => post.userId)
+      const dedupedUserIds = [...new Set(userIds)]
+      setPosts(posts)
+      const promises = dedupedUserIds.map(id => fetchUser(id))
+      const userList = await Promise.all(promises).then(users => users)
+      const userListById = {}
+      userList.forEach(user => userListById[user.id] = user)
+      setUsers(userListById)
+      setLoading(false)
+    }
+
     fetchPosts().catch(error => errorHandler(error))
   }, []);
-
-  async function fetchPosts() {
-    setLoading(true)
-    const postsResponse = await fetch('https://jsonplaceholder.typicode.com/posts')
-    if (!postsResponse.ok) throw new Error(`fetchPosts error: ${postsResponse.status}`)
-    const posts = await postsResponse.json()
-    const userIds = posts.map(post => post.userId)
-    const dedupedUserIds = [...new Set(userIds)]
-    setPosts(posts)
-    const promises = dedupedUserIds.map(id => fetchUser(id))
-    const userList = await Promise.all(promises).then(users => users)
-    const userListById = {}
-    const userListByEmail = {}
-    userList.forEach(user => {
-      userListById[user.id] = user
-      userListByEmail[user.email] = user
-    })
-    setUsers(userListById)
-    setUsersByEmail(userListByEmail)
-    setLoading(false)
-  }
 
   async function fetchUser(id) {
     const response = await fetch(`https://jsonplaceholder.typicode.com/users/${id}`)
@@ -46,17 +40,6 @@ const Posts = props => {
     const user = await response.json()
     return user
   }
-
-  const getUserById = id => users[id]
-  const getUserByEmail = email => usersByEmail[email]
-
-  const renderedPosts = postsByPage.map(
-    post => (
-      <li key={post.id}>
-        <Post post={post} user={users[post.userId]} getUserByEmail={getUserByEmail} />
-      </li>
-    )
-  )
 
   function onClickNextPage() {
     setCurrentPage(currentPage + 1 <= totalPages ? currentPage + 1 : 1)
@@ -73,14 +56,28 @@ const Posts = props => {
 
   return (
     <div>
-      <LoadingDefault loading={loading} />
+      <LoadingIcon loading={loading} />
       <div className={PostsStyles.paginationActions}>
-        <button onClick={ onClickPreviousPage }>Previous</button>
+        <button onClick={ onClickPreviousPage }>
+          <span className="material-icons">navigate_before</span>
+          <span className="sr-only">View previous page</span>
+        </button>
         <p>Current page: { currentPage }</p>
-        <button onClick={ onClickNextPage }>Next</button>
+        <button onClick={ onClickNextPage }>
+          <span className="material-icons">navigate_next</span>
+          <span className="sr-only">View next page</span>
+        </button>
       </div>
       <ul className={PostsStyles.posts}>
-        { renderedPosts }
+        {
+          postsByPage.map(
+            post => (
+              <li key={post.id}>
+                <Post post={post} user={users[post.userId]} />
+              </li>
+            )
+          )
+        }
       </ul>
     </div>
   )

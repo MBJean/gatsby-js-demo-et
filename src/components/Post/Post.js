@@ -1,43 +1,29 @@
 import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 import Comment from '../Comments/Comment'
-import LoadingDefault from '../Loading/LoadingDefault'
+import LoadingIcon from '../Loading/LoadingIcon'
 import PostStyles from './Post.module.scss'
 
 const Post = ({ post, user }) => {
 
   const [comments, setComments] = useState([])
-  const [loading, setLoading] = useState(false)
   const [showComments, setShowComments] = useState(false)
   const [showUser, setShowUser] = useState(false)
 
   useEffect(() => {
+    const fetchComments = async () => {
+      const response = await fetch(`https://jsonplaceholder.typicode.com/posts/${post.id}/comments`)
+      if (!response.ok) throw new Error(`fetchComments error: ${response.status}`)
+      const comments = await response.json()
+      setComments(comments)
+    }
+
     fetchComments().catch(error => errorHandler(error))
   }, []);
 
-  async function fetchComments() {
-    setLoading(true)
-    const response = await fetch(`https://jsonplaceholder.typicode.com/posts/${post.id}/comments`)
-    if (!response.ok) throw new Error(`fetchComments error: ${response.status}`)
-    const comments = await response.json()
-    setComments(comments)
-    setLoading(false)
-  }
+  const toggleShowComments = () => setShowComments(!showComments)
 
-  function toggleShowComments() {
-    setShowComments(!showComments)
-  }
-
-  function toggleShowUser() {
-    // TODO: make this do something
-    setShowUser(!showUser)
-  }
-
-  const renderedComments = comments.map((comment, index) => (
-    <li key={index}>
-      <Comment comment={comment} user={null} />
-    </li>
-  ))
+  const toggleShowUser = () => setShowUser(!showUser)
 
   function errorHandler(error) {
     // TODO: make this do more interesting things
@@ -50,12 +36,20 @@ const Post = ({ post, user }) => {
       <p>{ post.body }</p>
       <div className={PostStyles.actions}>
         <button className={PostStyles.action} onClick={toggleShowUser}>
-          <span className="material-icons">face</span>
-          { user ? user.name : <LoadingDefault loading={true} /> }
+          <span className="material-icons">account_circle</span>
+          {
+            user ?
+              <span>{ user.name }</span> :
+              <LoadingIcon loading={true} />
+          }
         </button>
         <button className={PostStyles.action} onClick={toggleShowComments}>
           <span className="material-icons">comment</span>
-          { comments ? comments.length : <LoadingDefault loading={true} /> }
+          {
+            comments.length ?
+              <span>{ comments.length }</span> :
+              <LoadingIcon loading={true} />
+          }
         </button>
       </div>
       {
@@ -68,7 +62,11 @@ const Post = ({ post, user }) => {
       {
         showComments &&
           <ul className={PostStyles.comments}>
-            { showComments && renderedComments }
+            {
+              comments.map(comment => (
+                <Comment key={`comment-${comment.id}`} comment={comment} user={null} />
+              ))
+            }
           </ul>
       }
     </div>

@@ -1,0 +1,7 @@
+@import '../../styles/variables.scss';
+
+.nav {
+  background-color: $color-white;
+  padding: $space-m;
+  @include container;
+}

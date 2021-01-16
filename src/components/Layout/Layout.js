@@ -1,21 +1,17 @@
 import React from 'react'
 import Footer from '../Footer/Footer'
-import NavigationSide from '../Navigation/NavigationSide'
-import NavigationTop from '../Navigation/NavigationTop'
+import Navigation from '../Navigation/Navigation'
 import LayoutStyles from './Layout.module.scss'
 
 const Layout = ({ children }) => (
   <main>
-    <div>
-      <NavigationTop />
-      <div className={LayoutStyles.body}>
-        <NavigationSide />
-        <div>
-          { children }
-        </div>
+    <Navigation />
+    <div className={LayoutStyles.background}>
+      <div className={LayoutStyles.content}>
+        { children }
       </div>
-      <Footer />
     </div>
+    <Footer />
   </main>
 )
 

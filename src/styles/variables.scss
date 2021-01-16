@@ -11,22 +11,33 @@ $space-xl: 3rem;
 
 $shadow-default: 0 0 30px rgba(0, 0, 0, 0.1);
 
-$container-width-small: 800px;
-$container-width: 1200px;
+$width-small: 768px;
+$width-medium: 900px;
+$width-large: 1200px;
 
 $font-size-s: 0.875rem;
 $font-size-m: 1rem;
-$font-size-l: 1.375rem;
-$font-size-xl: 1.625rem;
+$font-size-l: 1.5rem;
+$font-size-xl: 2rem;
 
 @mixin card {
   background-color: $color-white;
   box-shadow: $shadow-default;
   padding: $space-m;
 }
+
+@mixin flexed {
+  align-items: center;
+  display: flex;
+  justify-content: flex-end;
+  > :not(:last-child) {
+    margin-right: $space-s;
+  }
+}
+
 @mixin container {
   margin: auto;
-  max-width: $container-width;
+  max-width: $width-large;
   padding-left: $space-m;
   padding-right: $space-m;
   @media (min-width: 768px) {

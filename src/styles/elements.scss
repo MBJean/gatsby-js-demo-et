@@ -59,7 +59,7 @@ h3,
   font-size: $font-size-m;
   font-weight: 700;
   line-height: 1;
-  margin-bottom: $space-l;
+  margin-bottom: $space-s;
 }
 
 h4,
@@ -84,6 +84,9 @@ p,
 .p {
   font-size: $font-size-m;
   font-weight: 300;
+  &:last-child {
+    margin-bottom: 0;
+  }
 }
 
 i {
@@ -111,4 +114,18 @@ li {
 
 strong {
   font-weight: 700;
+}
+
+.sr-only {
+  border: 0 !important;
+  clip: rect(1px, 1px, 1px, 1px) !important; /* 1 */
+  -webkit-clip-path: inset(50%) !important;
+  clip-path: inset(50%) !important; /* 2 */
+  height: 1px !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  padding: 0 !important;
+  position: absolute !important;
+  width: 1px !important;
+  white-space: nowrap !important; /* 3 */
 }

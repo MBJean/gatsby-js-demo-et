@@ -1,0 +1,14 @@
+@import '../../styles/variables.scss';
+
+.comment {
+  border: 1px solid $color-secondary;
+  border-radius: $space-s;
+  padding: $space-m;
+  &:not(:last-child) {
+    margin-bottom: $space-m;
+  }
+}
+
+.commenter {
+  @include flexed;
+}

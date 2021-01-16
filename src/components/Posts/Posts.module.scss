@@ -1,7 +1,6 @@
 @import '../../styles/variables.scss';
 
 .posts {
-  max-width: $container-width-small;
   > * {
     margin-bottom: $space-m;
   }
@@ -10,8 +9,14 @@
 .pagination-actions {
   align-items: center;
   display: flex;
-  justify-content: flex-end;
+  justify-content: center;
   * {
     margin: $space-s;
+  }
+}
+
+@media (min-width: $width-medium) {
+  .pagination-actions {
+    justify-content: flex-end;
   }
 }
