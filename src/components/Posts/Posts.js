@@ -5,10 +5,15 @@ import PostsStyles from './Posts.module.scss'
 
 const Posts = props => {
 
+  const [currentPage, setCurrentPage] = useState(1);
   const [loading, setLoading] = useState(false)
   const [posts, setPosts] = useState([])
   const [users, setUsers] = useState({})
   const [usersByEmail, setUsersByEmail] = useState({})
+
+  const totalPages = Math.floor(posts.length / 10)
+  const postsByPage = posts.slice(currentPage * totalPages, currentPage * totalPages + 10)
+
 
   useEffect(() => {
     fetchPosts().catch(error => errorHandler(error))
@@ -45,13 +50,18 @@ const Posts = props => {
   const getUserById = id => users[id]
   const getUserByEmail = email => usersByEmail[email]
 
-  const renderedPosts = posts.map(
-    (post, index) => (
-      <li key={index}>
+  const renderedPosts = postsByPage.map(
+    post => (
+      <li key={post.id}>
         <Post post={post} user={users[post.userId]} getUserByEmail={getUserByEmail} />
       </li>
     )
   )
+
+  function onClickNextPage() {
+    setCurrentPage(currentPage + 1 <= totalPages ? currentPage + 1: 1)
+    console.log(currentPage)
+  }
 
   function errorHandler(error) {
     // TODO: make this do more interesting things
@@ -61,6 +71,8 @@ const Posts = props => {
   return (
     <div>
       <LoadingDefault loading={loading} />
+      <p>Current page: { currentPage }</p>
+      <button onClick={ onClickNextPage }>Next</button>
       <ul className={PostsStyles.posts}>
         { renderedPosts }
       </ul>
