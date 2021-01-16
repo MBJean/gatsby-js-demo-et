@@ -6,3 +6,12 @@
     margin-bottom: $space-m;
   }
 }
+
+.pagination-actions {
+  align-items: center;
+  display: flex;
+  justify-content: flex-end;
+  * {
+    margin: $space-s;
+  }
+}

@@ -11,7 +11,7 @@ const Posts = props => {
   const [users, setUsers] = useState({})
   const [usersByEmail, setUsersByEmail] = useState({})
 
-  const totalPages = Math.floor(posts.length / 10)
+  const totalPages = Math.floor(posts.length / 10) - 1
   const postsByPage = posts.slice(currentPage * totalPages, currentPage * totalPages + 10)
 
 
@@ -59,8 +59,11 @@ const Posts = props => {
   )
 
   function onClickNextPage() {
-    setCurrentPage(currentPage + 1 <= totalPages ? currentPage + 1: 1)
-    console.log(currentPage)
+    setCurrentPage(currentPage + 1 <= totalPages ? currentPage + 1 : 1)
+  }
+
+  function onClickPreviousPage() {
+    setCurrentPage(currentPage - 1 === 0 ? totalPages : currentPage - 1)
   }
 
   function errorHandler(error) {
@@ -71,8 +74,11 @@ const Posts = props => {
   return (
     <div>
       <LoadingDefault loading={loading} />
-      <p>Current page: { currentPage }</p>
-      <button onClick={ onClickNextPage }>Next</button>
+      <div className={PostsStyles.paginationActions}>
+        <button onClick={ onClickPreviousPage }>Previous</button>
+        <p>Current page: { currentPage }</p>
+        <button onClick={ onClickNextPage }>Next</button>
+      </div>
       <ul className={PostsStyles.posts}>
         { renderedPosts }
       </ul>
