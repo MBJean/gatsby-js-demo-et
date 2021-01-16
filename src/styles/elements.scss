@@ -10,8 +10,11 @@ html {
 // semantically-defined stylings
 
 a {
+  color: $color-secondary;
   text-decoration: none;
-  &:visited,
+  &:visited {
+    color: $color-secondary;
+  }
   &:hover,
   &:focus,
   &:active {

@@ -29,8 +29,20 @@
   }
 }
 
+.action-comment {
+  * {
+    color: $color-primary;
+  }
+}
+
+.action-user {
+  * {
+    color: $color-secondary;
+  }
+}
+
 .user {
-  border: 1px solid $color-primary;
+  border: 2px solid $color-secondary;
   border-radius: $space-s;
   padding: $space-m;
   &:not(:last-child) {

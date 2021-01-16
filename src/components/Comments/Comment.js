@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import CommentStyles from './Comment.module.scss'
 
-const Comment = ({ comment, user }) => (
+const Comment = ({ comment }) => (
   <li className={ CommentStyles.comment }>
     <p>{ comment.name }</p>
     <p>{ comment.body }</p>

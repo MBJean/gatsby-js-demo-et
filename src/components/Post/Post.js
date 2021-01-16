@@ -2,13 +2,22 @@ import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 import Comment from '../Comments/Comment'
 import LoadingIcon from '../Loading/LoadingIcon'
-import PostStyles from './Post.module.scss'
+import STYLES from './Post.module.scss'
 
 const Post = ({ post, user }) => {
 
   const [comments, setComments] = useState([])
   const [showComments, setShowComments] = useState(false)
   const [showUser, setShowUser] = useState(false)
+
+  const toggleShowComments = () => setShowComments(!showComments)
+
+  const toggleShowUser = () => setShowUser(!showUser)
+
+  const errorHandler = (error) => {
+    // TODO: make this do more interesting things
+    console.log(error)
+  }
 
   useEffect(() => {
     const fetchComments = async () => {
@@ -19,23 +28,14 @@ const Post = ({ post, user }) => {
     }
 
     fetchComments().catch(error => errorHandler(error))
-  }, []);
-
-  const toggleShowComments = () => setShowComments(!showComments)
-
-  const toggleShowUser = () => setShowUser(!showUser)
-
-  function errorHandler(error) {
-    // TODO: make this do more interesting things
-    console.log(error)
-  }
+  }, [post]);
 
   return (
-    <div className={PostStyles.post}>
+    <div className={STYLES.post}>
       <h3>{ post.title }</h3>
       <p>{ post.body }</p>
-      <div className={PostStyles.actions}>
-        <button className={PostStyles.action} onClick={toggleShowUser}>
+      <div className={STYLES.actions}>
+        <button className={`${STYLES.action} ${STYLES.actionUser}`} onClick={toggleShowUser}>
           <span className="material-icons">account_circle</span>
           {
             user ?
@@ -43,7 +43,7 @@ const Post = ({ post, user }) => {
               <LoadingIcon loading={true} />
           }
         </button>
-        <button className={PostStyles.action} onClick={toggleShowComments}>
+        <button className={`${STYLES.action} ${STYLES.actionComment}`} onClick={toggleShowComments}>
           <span className="material-icons">comment</span>
           {
             comments.length ?
@@ -54,14 +54,14 @@ const Post = ({ post, user }) => {
       </div>
       {
         showUser &&
-          <div className={PostStyles.user}>
+          <div className={STYLES.user}>
             <p>{ user.name } ({ user.username })</p>
             <p>{ user.email }</p>
           </div>
       }
       {
         showComments &&
-          <ul className={PostStyles.comments}>
+          <ul className={STYLES.comments}>
             {
               comments.map(comment => (
                 <Comment key={`comment-${comment.id}`} comment={comment} user={null} />

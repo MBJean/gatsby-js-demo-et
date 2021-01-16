@@ -1,7 +1,7 @@
 import React from 'react'
 import NavigationStyles from './Navigation.module.scss'
 
-const Navigation = props => (
+const Navigation = () => (
   <nav className={ NavigationStyles.nav }>
     <a href="/">IPSUM</a>
   </nav>

@@ -3,7 +3,7 @@
 .hourglass {
   > * {
     animation: hourglass-animation 1.5s infinite;
-    color: $color-secondary;
+    color: $color-loading !important;
   }
 }
 

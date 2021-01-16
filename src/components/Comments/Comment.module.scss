@@ -1,7 +1,7 @@
 @import '../../styles/variables.scss';
 
 .comment {
-  border: 1px solid $color-secondary;
+  border: 2px solid $color-primary;
   border-radius: $space-s;
   padding: $space-m;
   &:not(:last-child) {
