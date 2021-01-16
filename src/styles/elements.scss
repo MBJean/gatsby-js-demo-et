@@ -1,6 +1,7 @@
 * {
   box-sizing: border-box;
-  font-family: 'Cabin', sans-serif;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
 }
 
 html {
@@ -34,18 +35,10 @@ button {
 }
 
 h1,
-h2,
-h3,
-.h--1,
-.h--2,
-.h--3 {
-  font-weight: 700;
-}
-
-h1,
 .h--1 {
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'Raleway', sans-serif;
   font-size: $font-size-xl;
+  font-weight: 400;
   line-height: 1;
   margin-bottom: $space-l;
 }

@@ -21,11 +21,11 @@ module.exports = {
       options: {
         fonts: [
           {
-            family: `Open Sans`,
+            family: `Raleway`,
             variants: [`400`, `700`]
           },
           {
-            family: `Cabin`,
+            family: `Roboto`,
             variants: [`400`, `700`]
           },
         ],

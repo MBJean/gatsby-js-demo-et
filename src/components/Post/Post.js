@@ -54,20 +54,26 @@ const Post = ({ post, user }) => {
       </div>
       {
         showUser &&
-          <div className={STYLES.user}>
-            <p>{ user.name } ({ user.username })</p>
-            <p>{ user.email }</p>
+          <div>
+            <h4>User</h4>
+            <div className={STYLES.user}>
+              <p>{ user.name } ({ user.username })</p>
+              <p>{ user.email }</p>
+            </div>
           </div>
       }
       {
         showComments &&
-          <ul className={STYLES.comments}>
-            {
-              comments.map(comment => (
-                <Comment key={`comment-${comment.id}`} comment={comment} user={null} />
-              ))
-            }
-          </ul>
+          <div className={STYLES.comments}>
+            <h4>Comments</h4>
+            <ul>
+              {
+                comments.map(comment => (
+                  <Comment key={`comment-${comment.id}`} comment={comment} user={null} />
+                ))
+              }
+            </ul>
+          </div>
       }
     </div>
   )

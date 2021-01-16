@@ -45,7 +45,8 @@
   border: 2px solid $color-secondary;
   border-radius: $space-s;
   padding: $space-m;
-  &:not(:last-child) {
-    margin-bottom: $space-m;
-  }
+}
+
+.comments {
+  margin-top: $space-m;
 }
