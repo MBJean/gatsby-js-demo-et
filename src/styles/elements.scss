@@ -1,5 +1,6 @@
 * {
   box-sizing: border-box;
+  font-family: 'Cabin', sans-serif;
 }
 
 html {
@@ -40,6 +41,7 @@ h3,
 
 h1,
 .h--1 {
+  font-family: 'Open Sans', sans-serif;
   font-size: $font-size-xl;
   line-height: 1;
   margin-bottom: $space-l;

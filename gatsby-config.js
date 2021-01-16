@@ -16,5 +16,20 @@ module.exports = {
       },
       __key: "images",
     },
+    {
+      resolve: `gatsby-plugin-prefetch-google-fonts`,
+      options: {
+        fonts: [
+          {
+            family: `Open Sans`,
+            variants: [`400`, `700`]
+          },
+          {
+            family: `Cabin`,
+            variants: [`400`, `700`]
+          },
+        ],
+      },
+    }
   ],
 };
