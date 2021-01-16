@@ -17,20 +17,5 @@ module.exports = {
       },
       __key: "images",
     },
-    {
-      resolve: `gatsby-plugin-prefetch-google-fonts`,
-      options: {
-        fonts: [
-          {
-            family: `Raleway`,
-            variants: [`400`, `700`]
-          },
-          {
-            family: `Roboto`,
-            variants: [`400`, `700`]
-          },
-        ],
-      },
-    }
   ],
 };
