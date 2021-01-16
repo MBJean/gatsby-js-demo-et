@@ -8,10 +8,12 @@ const Layout = props => (
   <main>
     <div>
       <NavigationTop />
-      <div>
-        { props.children }
+      <div className={LayoutStyles.body}>
+        <NavigationSide />
+        <div>
+          { props.children }
+        </div>
       </div>
-      <NavigationSide />
       <Footer />
     </div>
   </main>

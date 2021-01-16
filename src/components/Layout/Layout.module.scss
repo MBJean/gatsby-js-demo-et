@@ -1,1 +1,10 @@
-@import '../../styles/variables'
+@import '../../styles/variables';
+
+.body {
+  background-color: $color-tertiary;
+  display: flex;
+  padding: $space-m;
+  > :first-child {
+    width: 20%;
+  }
+}

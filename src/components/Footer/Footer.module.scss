@@ -1,0 +1,11 @@
+@import '../../styles/variables';
+
+.footer {
+  background-color: $color-white;
+  padding: $space-xl $space-m;
+  @include container;
+}
+
+.copyright {
+  text-align: center;
+}

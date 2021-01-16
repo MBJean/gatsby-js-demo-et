@@ -1,0 +1,20 @@
+@import '../../styles/variables.scss';
+
+.nav {
+  background-color: $color-white;
+  padding: $space-m;
+}
+
+.nav-body {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+}
+
+.links {
+  align-items: center;
+  display: flex;
+  > *:not(:last-child) {
+    margin-right: $space-m;
+  }
+}

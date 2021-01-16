@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 import Comment from '../Comments/Comment'
 import LoadingDefault from '../Loading/LoadingDefault'
+import PostStyles from './Post.module.scss'
 
 const Post = (props) => {
 
@@ -28,6 +29,7 @@ const Post = (props) => {
   }
 
   function toggleShowUser() {
+    // TODO: make this do something
     setShowUser(!showUser)
   }
 
@@ -43,19 +45,19 @@ const Post = (props) => {
   }
 
   return (
-    <div>
-      <p>{ props.post.title }</p>
+    <div className={PostStyles.post}>
+      <h3>{ props.post.title }</h3>
       <p>{ props.post.body }</p>
-      {
-        props.user ?
-          <button onClick={toggleShowUser}>props.user.name</button> :
-          <LoadingDefault loading={true} />
-      }
-      {
-        comments ?
-          <button onClick={toggleShowComments}>comments.length</button> :
-          <LoadingDefault loading={true} />
-        }
+      <div className={PostStyles.actions}>
+        <button className={PostStyles.action} onClick={toggleShowUser}>
+          <span className="material-icons">face</span>
+          { props.user ? props.user.name : <LoadingDefault loading={true} /> }
+        </button>
+        <button className={PostStyles.action} onClick={toggleShowComments}>
+          <span className="material-icons">comment</span>
+          { comments ? comments.length : <LoadingDefault loading={true} /> }
+        </button>
+      </div>
       <ul>
         { showComments && renderedComments }
       </ul>

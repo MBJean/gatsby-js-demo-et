@@ -50,7 +50,7 @@ const Posts = props => {
   return (
     <div>
       <LoadingDefault loading={loading} />
-      <ul>
+      <ul className={PostsStyles.posts}>
         { renderedPosts }
       </ul>
     </div>

@@ -1,0 +1,8 @@
+@import '../../styles/variables.scss';
+
+.posts {
+  max-width: $container-width-small;
+  > * {
+    margin-bottom: $space-m;
+  }
+}

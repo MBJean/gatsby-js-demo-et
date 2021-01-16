@@ -1,0 +1,27 @@
+@import '../../styles/variables.scss';
+
+.post {
+  @include card;
+}
+
+.actions,
+.action {
+  align-items: center;
+  display: flex;
+  > * {
+    margin-right: $space-xs;
+  }
+}
+
+.actions {
+  justify-content: flex-end;
+  margin: $space-s 0;
+}
+
+.action {
+  appearance: none;
+  border: 0;
+  border-radius: $space-xs;
+  background-color: none;
+  cursor: pointer;
+}
